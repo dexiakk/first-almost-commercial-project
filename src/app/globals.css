@@ -1,0 +1,98 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Outfit';
+  font-style: normal;
+  font-weight: 400;
+  src: url('/fonts/Outfit.ttf') format('ttf');
+}
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+  font-family: "Outfit", sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  background-image: url('/img/background.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+.text-gradinet {
+  background: rgb(2, 148, 29);
+  background: linear-gradient(90deg, rgba(2, 148, 29, 1) 0%, rgba(243, 223, 149, 1) 100%, rgba(0, 212, 255, 1) 100%);
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+.girlImageBackground {
+  background: rgb(14, 29, 6);
+  background: linear-gradient(90deg, rgba(14, 29, 6, 1) 0%, rgba(19, 35, 7, 1) 81%, rgba(19, 35, 7, 1) 100%);
+}
+
+.field input {
+  -webkit-appearance: none;
+  height: 6px;
+  width: 100%;
+  background: white;
+  outline: none;
+  border-radius: 15px;
+}
+
+.field input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 16px;
+  width: 16px;
+  background: #6dd981;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.field input::-moz-range-thumb {
+  -webkit-appearance: none;
+  height: 15px;
+  width: 15px;
+  background: #6dd981;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+#buttonCircle{
+  transition-duration: 50ms;
+}
+
+.tokensInput{
+  background: none;
+}
+
+.tokensInput:focus{
+  outline: none;
+  -webkit-box-sizing: none;
+  -webkit-appearance: none;
+  -moz-appearance: textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button{
+  -webkit-appearance: none;
+  margin: 0;
+}
