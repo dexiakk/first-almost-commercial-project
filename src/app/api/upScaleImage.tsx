@@ -35,6 +35,21 @@ export default function UpScaleImage() {
             : setbuttonCircleState(circleTurnedOff)
     }
 
+    const [uploadedImage, setUploadedImage] = useState("")
+    const [uploadImageFieldVisiblility, setUploadImageFieldVisiblility] = useState("block")
+    const [afterUpload, setAfterUpload] = useState("hidden")
+
+    const handleChange = (image) => {
+        setUploadedImage(URL.createObjectURL(image.target.files[0]))
+        console.log(image.target.files[0].name)
+
+        uploadImageFieldVisiblility === "block" ? setUploadImageFieldVisiblility("hidden") : setUploadImageFieldVisiblility("block")
+
+        document.getElementById("uploadedImageText").innerHTML = '<span>' + image.target.files[0].name + '</span>'
+
+        afterUpload === "hidden" ? setAfterUpload("block") : setAfterUpload("hidden")
+    }
+
     return (
         <div className="w-full">
             <h1 className="mt-[32px] mb-[32px] text-white text-[34px] font-bold">Upscale image</h1>
@@ -88,11 +103,32 @@ export default function UpScaleImage() {
                         </button>
                     </div>
                 </div>
-                <div className="w-[900px] flex flex-col px-3 pt-3 pb-3 bg-black bg-opacity-35 border-solid border-2 border-white border-opacity-[15%] rounded-[17px]">
-                    <div className="flex flex-col justify-center items-center bg-[#6dd981] hover:bg-[#9ae5a7] hover:bg-opacity-10 bg-opacity-10 w-full h-full border-2 border-dashed border-white border-opacity-[15%] rounded-[17px]">
-                        <Image src={"/img/uploadCloud.svg"} alt='login' width={35} height={35} className="mb-2" />
-                        <span className="text-white pt-[2px]">Drag and drop image or <span className="text-[#6dd981]">browse</span></span>
-                        <span className="text-[#a3ada3] text-[14px] pt-[1px]">Max file size 50MB</span>
+                <input type="file" className="hidden" accept="image/*" id="file_input" onChange={handleChange} />
+                <label for="file_input" className="w-[900px] flex flex-col">
+                    <div className="w-[900px] h-full flex flex-col px-3 pt-3 pb-3 bg-black bg-opacity-35 border-solid border-2 border-white border-opacity-[15%] rounded-[17px]">
+                        <div className={`${uploadImageFieldVisiblility} flex flex-col justify-center items-center bg-[#6dd981] hover:bg-[#9ae5a7] hover:bg-opacity-10 bg-opacity-10 w-full h-full border-2 border-dashed border-white border-opacity-[15%] rounded-[17px]`}>
+                            <Image src={"/img/uploadCloud.svg"} alt='login' width={35} height={35} className="mb-2" />
+                            <span className="text-white pt-[2px]">Drag and drop image or <span className="text-[#6dd981]">browse</span></span>
+                            <span className="text-[#a3ada3] text-[14px] pt-[1px]">Max file size 50MB</span>
+                        </div>
+
+                        <div className={`${afterUpload} flex flex-col items-center my-auto`}>
+                            <div className="flex">
+                                <div id="uploadedImageText" className="text-[17px] text-[#6dd981] font-medium"></div><span className="text-[17px] text-white font-medium">&nbsp;has been uploaded!</span>
+                            </div>
+                            <Image src={uploadedImage} alt='uploadedImage' width={280} height={187} className="mt-2 rounded-[17px]" />
+                            <button className="mt-3 text-white w-[280px] py-2 bg-[#02931c] hover:bg-[#19c538] border-solid border-2 border-[#02931c] rounded-[17px]">Upgrade Now <span>&gt;</span></button>
+                        </div>
+                    </div>
+                </label>
+
+            </div>
+
+            <div className={`${afterUpload}`}>
+                <h1 className="mt-[32px] mb-[32px] text-white text-[34px] font-bold">Result</h1>
+                <div className="flex justify-center">
+                    <div className="w-[900px] h-full flex justify-center px-3 pt-3 pb-3 bg-black bg-opacity-35 border-solid border-2 border-white border-opacity-[15%] rounded-[17px]">
+                        <Image src={uploadedImage} alt='uploadedImage' width={800} height={10} className="my-2 rounded-[17px]" />
                     </div>
                 </div>
             </div>
